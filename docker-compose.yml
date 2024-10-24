@@ -1,0 +1,64 @@
+services:
+  mpi_master:
+    build: .
+    container_name: mpi_master
+    hostname: mpi_master
+    networks:
+      mpi_net:
+        ipv4_address: 172.20.0.2
+    environment:
+      - HOSTS=mpi_master,mpi_worker1,mpi_worker2,mpi_worker3,mpi_worker4
+    volumes:
+      - ./src:/root/work
+    depends_on:
+      - mpi_worker1
+      - mpi_worker2
+      - mpi_worker3
+      - mpi_worker4
+
+  mpi_worker1:
+    build: .
+    container_name: mpi_worker1
+    hostname: mpi_worker1
+    networks:
+      mpi_net:
+        ipv4_address: 172.20.0.3
+    volumes:
+      - ./src:/root/work
+
+  mpi_worker2:
+    build: .
+    container_name: mpi_worker2
+    hostname: mpi_worker2
+    networks:
+      mpi_net:
+        ipv4_address: 172.20.0.4
+    volumes:
+      - ./src:/root/work
+
+  mpi_worker3:
+    build: .
+    container_name: mpi_worker3
+    hostname: mpi_worker3
+    networks:
+      mpi_net:
+        ipv4_address: 172.20.0.5
+    volumes:
+      - ./src:/root/work
+
+  mpi_worker4:
+    build: .
+    container_name: mpi_worker4
+    hostname: mpi_worker4
+    networks:
+      mpi_net:
+        ipv4_address: 172.20.0.6
+    volumes:
+      - ./src:/root/work
+
+networks:
+  mpi_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
