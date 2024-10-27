@@ -1,55 +1,55 @@
 services:
-  mpi_master:
+  mpi-master:
     build: .
-    container_name: mpi_master
-    hostname: mpi_master
+    container_name: mpi-master
+    hostname: mpi-master
     networks:
       mpi_net:
         ipv4_address: 172.20.0.2
     environment:
-      - HOSTS=mpi_master,mpi_worker1,mpi_worker2,mpi_worker3,mpi_worker4
+      - HOSTS=mpi-master,mpi-worker1,mpi-worker2,mpi-worker3,mpi-worker4
     volumes:
       - ./src:/root/work
     depends_on:
-      - mpi_worker1
-      - mpi_worker2
-      - mpi_worker3
-      - mpi_worker4
+      - mpi-worker1
+      - mpi-worker2
+      - mpi-worker3
+      - mpi-worker4
 
-  mpi_worker1:
+  mpi-worker1:
     build: .
-    container_name: mpi_worker1
-    hostname: mpi_worker1
+    container_name: mpi-worker1
+    hostname: mpi-worker1
     networks:
       mpi_net:
         ipv4_address: 172.20.0.3
     volumes:
       - ./src:/root/work
 
-  mpi_worker2:
+  mpi-worker2:
     build: .
-    container_name: mpi_worker2
-    hostname: mpi_worker2
+    container_name: mpi-worker2
+    hostname: mpi-worker2
     networks:
       mpi_net:
         ipv4_address: 172.20.0.4
     volumes:
       - ./src:/root/work
 
-  mpi_worker3:
+  mpi-worker3:
     build: .
-    container_name: mpi_worker3
-    hostname: mpi_worker3
+    container_name: mpi-worker3
+    hostname: mpi-worker3
     networks:
       mpi_net:
         ipv4_address: 172.20.0.5
     volumes:
       - ./src:/root/work
 
-  mpi_worker4:
+  mpi-worker4:
     build: .
-    container_name: mpi_worker4
-    hostname: mpi_worker4
+    container_name: mpi-worker4
+    hostname: mpi-worker4
     networks:
       mpi_net:
         ipv4_address: 172.20.0.6
